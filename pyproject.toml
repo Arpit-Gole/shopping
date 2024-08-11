@@ -1,0 +1,47 @@
+[tool.ruff]
+line-length = 120
+fix = true
+# Assume Python 3.10.
+target-version = "py310"
+
+[tool.ruff.lint]
+select = ["F", "E", "W", "N", "UP", "ASYNC", "S", "C4", "DTZ", "LOG", "G", "INP", "PIE", "T20", "PYI",
+     "RSE", "RET", "SIM", "TID", "TCH", "PTH", "ERA", "PD", "PGH",  "NPY", "FURB"]
+ignore = ["TRY003"]
+# Allow unused variables when underscore-prefixed.
+dummy-variable-rgx = "^(_+|(_+[a-zA-Z0-9_]*[a-zA-Z0-9]+?))$"
+# Allow autofix for all enabled rules (when `fix` is true).
+fixable = ["F", "E", "W"]
+unfixable = []
+# Ignoring the following.
+# 1. S101: Use of `assert` detected. Makes no sense in test.
+per-file-ignores = { "tests/*" = ["S101"] }
+
+[tool.isort]
+profile = "black"
+
+[tool.black]
+line-length = 120
+exclude = '''
+/(\.git
+| \.hg
+| \.mypy_cache
+| \.tox
+| \.venv
+| _build
+| buck-out
+| build
+)/
+'''
+
+[tool.vulture]
+min_confidence = 80
+paths = ["shopping"]
+sort_by_size = true
+verbose = false
+
+[tool.pytest.ini_options]
+log_cli = true
+log_cli_level = "DEBUG"
+log_cli_format = "%(asctime)s [%(levelname)s] %(message)s (%(filename)s:%(lineno)s)"
+log_cli_date_format = "%Y-%m-%d %H:%M:%S"
